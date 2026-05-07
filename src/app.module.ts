@@ -10,12 +10,12 @@ import { ReportsModule } from './reports/reports.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === 'production'
+      ssl: process.env.DATABASE_URL?.includes('.render.com')
         ? { rejectUnauthorized: false }
         : false,
       autoLoadEntities: true,
-      synchronize: process.env.NODE_ENV !== 'production',
-      logging: process.env.NODE_ENV === 'development',
+      synchronize: true,
+      logging: false,
     }),
     AuthModule,
     BusinessModule,
